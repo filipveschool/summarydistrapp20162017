@@ -12,6 +12,9 @@
 *.cb
 *.cb2
 
+## filip extra folders
+_minted-masterproef/
+
 ## Intermediate documents:
 *.dvi
 *-converted-to.*

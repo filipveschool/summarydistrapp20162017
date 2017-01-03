@@ -1,0 +1,6 @@
+\begin{figure}[tbph!]
+	\centering
+	\includegraphics[width=9cm]{images/startersloonictbachelor2}
+	\caption[Startersloon overzicht voor bachelor diploma ICT]{Dit is een overzicht van de starterslonen voor het bachelordiploma ICT die je gemiddeld zou verdienen.}
+	\label{fig:startersloonictbachelor}
+\end{figure}
