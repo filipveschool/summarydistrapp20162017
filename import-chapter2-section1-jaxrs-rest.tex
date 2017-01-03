@@ -1,0 +1,75 @@
+
+\section{Produce}
+
+\subsection{Resource examples}
+
+\begin{minted}{java}
+@Path(“sorcerors/{sorcerer_id}”)
+public class SorcerorService {
+	@GET
+	@Path("wand")
+	Wand getWand(...)
+	{...}
+}
+\end{minted}
+
+\subsection{Mapping of parameters}
+
+\begin{minted}{java}
+@Path("sorcerors/{name}")
+public class SorcerorService {
+	@GET
+	Sorcerer getSorcerorByName
+				(@PathParam("name") String name)
+	{...}
+}
+\end{minted}
+
+\subsection{Response through accept headers}
+
+\begin{minted}{java}
+@GET
+@Produces({"application/xml","application/json"})
+Wand getWand(@PathParam("sorcerorId") String id)
+{ ... }
+
+@GET
+@Produces("text/plain")
+String getWand2(@PathParam("sorcerorId") String id)
+{ ... }
+\end{minted}
+
+\subsection{URL based content negotiation}
+
+\begin{minted}{java}
+@Path("/wands")
+public class WandResource {
+	@Path("{wandId}.xml")
+	@GET
+	public Wand getWandInXml(@PathParam("wandId")int wandId)
+	{…}
+
+	@Path("{wandId}.json")
+	@GET
+	public Wand getWandInJSON(@PathParam("wandId")int wandId)
+	{...}
+}
+\end{minted}
+
+\section{Consume}
+
+\subsection{Client}
+
+\begin{minted}{java}
+Client client = ClientBuilder.newClient();
+WebTarget target = client
+			.target("http://localhost:8080/magic/api/sorcerors.json")
+			.queryParam("name", "harry");
+
+Sorcerer response=target.request(MediaType.APPLICATION_JSON).get(Sorcerer.class);
+\end{minted}
+
+\begin{minted}{java}
+
+\end{minted}
+

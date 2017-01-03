@@ -1,0 +1,52 @@
+\chapter{CDI}
+\label{CDI}
+\thispagestyle{chapternohead}
+
+	
+\pagestyle{ruledfilip}
+
+\section{Inversion of control}
+
+Dependency is not initiated in the class that needs it, but somewhere else, another class is 'in control’.
+
+\begin{minted}{java}
+public class UserService {
+private PasswordGenerator generator;
+
+public UserService (PasswordGenerator generator){
+this.generator = generator;
+}
+public User createUser(String userid){
+User user = new User();
+user.setUserid(userid);
+user.setPassword(generator.generatePassword());
+return user;
+}
+}
+\end{minted}
+
+This example:
+\begin{itemize}
+	
+	\item dependency is created 'manually’ in main method
+	\item and is then passed as a parameter of the constructor
+\end{itemize}
+
+\begin{minted}{java}
+public class UserUi {
+public static void main(String[] args) {
+PasswordGenerator generator = new StrongPasswordGenerator();
+UserService service = new UserService(generator);
+service.createUser("aUser");
+}
+}
+\end{minted}
+
+
+\section{}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "masterproef"
+%%% End:
+
