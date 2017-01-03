@@ -1,0 +1,136 @@
+%%
+%% This is file `ucllfilipx.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% ucllfilipx.dtx  (with options: `style')
+%% 
+%% This is a generated file.
+%% 
+%% Copyright (C) 2010 by Luc Van Eycken <Luc.VanEycken@esat.kuleuven.be>
+%% 
+%% This file may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License, either version 1.2 of this license
+%% or (at your option) any later version.  The latest version of this
+%% license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%% 
+\NeedsTeXFormat{LaTeX2e}[2001/06/01]
+\ProvidesPackage{ucllfilipx}
+    [2010/02/28 v0.1
+     Additions to the ucllfilip document class]
+\newsavebox\ucllfilipx@chpnumbox
+\def\ucllfilipx@buildchpnum#1#2{\sbox\ucllfilipx@chpnumbox{%
+    \tabular[t]{@{}c@{}}%
+      \makebox[0pt][c]{\chapnamefont #1\strut}\\[.5ex]%
+      \colorbox[gray]{.8}{\color{black}%
+        \rule[-7em]{0pt}{0pt}%
+        {\chapnumfont \hspace{.7ex}#2\hspace{.7ex}\strut}}%
+    \endtabular}}
+\makechapterstyle{ucllfilipman}{%
+  \def\chapnamefont{\sffamily\large}%
+  \def\chapnumfont{\sffamily\Huge}%
+  \def\chaptitlefont{\sffamily\raggedright\huge}%
+  \setlength\beforechapskip\z@skip
+  \setlength\midchapskip{29\p@}%
+  \setlength\afterchapskip{40\p@}%
+  \def\printchaptername{}%
+  \def\chapternamenum{}%
+  \def\afterchapternum{}%
+  \def\printchapternum{%
+    \ucllfilipx@buildchpnum\@chapapp\thechapter}%
+  \def\printchapternonum{%
+    \ucllfilipx@buildchpnum{\vphantom{\@chapapp}}{\hphantom{\thechapter}}}%
+  \def\printchaptertitle##1{%
+    \usebox\ucllfilipx@chpnumbox \hfill
+    \@tempdima\hsize  \advance\@tempdima -1em%
+    \advance\@tempdima -\wd\ucllfilipx@chpnumbox
+    \parbox[t]\@tempdima{\vspace\midchapskip
+      \leavevmode \leaders\hrule\@height\p@ \hfill \kern\z@ \par
+      \chaptitlefont ##1\par}}}
+\makeheadstyles{ucllfilipman}{%
+  \def\partnamefont{\normalfont\huge\sffamily}%
+  \def\partnumfont{\normalfont\huge\sffamily}%
+  \def\parttitlefont{\normalfont\Huge\sffamily}%
+  \chapterstyle{ucllfilipman}%
+  \setsecheadstyle{\Large\sffamily\raggedright}%
+  \setsubsecheadstyle{\large\sffamily\raggedright}%
+  \setsubsubsecheadstyle{\large\sffamily\itshape\raggedright}%
+  \setparaheadstyle{\normalsize\scshape}%
+  \setbeforeparaskip{\medskipamount}}
+
+
+\newcommand*\ucllfilipmanToC{%
+  \let\cftchapterfont\sffamily
+  \let\cftchapterdotsep\cftdotsep
+  \def\cftchapterleader{\normalfont\cftdotfill{\cftchapterdotsep}}%
+  \def\cftchapterpagefont{}%
+  \setlength\cftbeforechapterskip{\medskipamount}%
+  \setlength\cftbeforesectionskip{\smallskipamount}%
+  \settocdepth{subsection}%
+  \addtodef\cftchapterbreak{\par}{}%
+  \let\cftsubsectionfont\itshape
+  \def\l@subsection##1##2{%
+    \leftskip\cftsubsectionindent \rightskip\@tocrmarg \parfillskip\fill
+    \ifhmode ,\quad \else\noindent\fi \ignorespaces
+    {\let\numberline\@gobble \cftsubsectionfont ##1}%
+    ~~{\cftsubsectionpagefont ##2}\ignorespaces}}
+
+
+%------------------------------
+
+%\pagestyle{fancy}
+
+%%RO = Right Odd
+%%LE = Left Even
+%\thepage => toont het paginanummer.
+%\pagestyle{empty} ==> zorgt ervoor dat we geen headers en footers hebben.
+%\pagestyle{plain} ==> zorgt ervoor dat we geen headers en footers hebben, maar wel een paginanummer in de footer.
+
+% This is to clear all the header fields
+%\fancyhead{}
+%Zet de tekst "thesis title" op de rechterkant van de hoofding op de oneven pagina's en op de linkerkant van de hoofding op de even pagina's.
+%\fancyhead[RO,LE]{Thesis Title}
+
+% This is to clear all the footer fields
+%\fancyfoot{}
+%Zet het paginanummer op de rechterkant van de footer op de oneven pagina's en op de linkerkant van de footer op de even pagina's.
+%\fancyfoot[LE,RO]{\thepage}
+%\fancyfoot[LO,CE]{Chapter \thechapter}
+%\fancyfoot[CO,RE]{Filip Vanden Eynde}
+
+%\newcommand{\fancyfront}{%
+%	\fancyhead [RO]{{\footnotesize \rightmark}}
+%	\fancyfoot [RO]{\thepage}
+%	\fancyhead [LE]{\footnotesize {\leftmark}}
+%	\fancyfoot [LE]{\thepage}
+%	\fancyhead [RE,LO]{}
+%	\fancyfoot [C]{}
+%	\renewcommand{\headrulewidth}{0.3pt}}
+%
+%\newcommand{\fncymain}{%
+%	\fancyhead [RO]{{\footnotesize \rightmark}}
+%	\fancyfoot [RO]{\thepage}
+%	\fancyhead [LE]{{\footnotesize \leftmark}}
+%	\fancyfoot [LE]{\thepage}
+%	\fancyfoot [C]{}
+%	\renewcommand{\headrulewidth }{0.3pt}}
+%
+%\newcommand{\noheaderfooter}{%
+%	\fancyhead{}
+%	\fancyfoot{}
+%	\renewcommand{\headrulewidth }{0pt}}
+
+%------------------------------------------------------
+
+
+
+
+\endinput
+%%
+%% End of file `ucllfilipx.sty'.

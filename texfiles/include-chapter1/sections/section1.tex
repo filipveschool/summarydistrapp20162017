@@ -1,0 +1,250 @@
+%\newpage
+\section{Explain that Maven\index{Maven} is easy to use because of ‘convention over Configuration’}
+
+\begin{itemize}
+	\item De programmeur moet minder beslissingen maken over de locatie van sommige zaken. Er is een standaard afgesproken structuur die Maven altijd gaat gebruiken en die je dus zelf niet moet specifieren. (Locatie libraries, packages en klassen)
+	\item Pom.xml erft over van Super Pom waar al standaard heel wat in staat geconfigureerd
+\end{itemize}
+
+\section{Explain how Maven helps you with dependency management}
+\begin{enumerate}
+	\item Maven leest in de pom.xml welke jars nodig zijn
+	\item Maven controleert of deze jars al in de local repository zitten
+	\item Zo niet, download Maven deze jars van de remote repository (Web Server)
+	\item Maven voegt deze jars toe aan de local repository
+\end{enumerate}
+
+$\Rightarrow$ Dit door een build uit te voeren. Het install commando wordt hier gebruikt
+
+\section{Know that the build lifecycle has different phases and that each phase calls the previous one}
+
+\begin{itemize}
+	\item Validate = Valideer het project + controleer of alle noodzakelijke info aanwezig is
+	\item Compile = Compileren van de source code
+		\item Test = Test de gecompileerde code door gebruik van een testing framework
+	\item Package =  Gecompileerde code vormen tot gedistribueerd formaat (JAR, WAR, ...)
+		\item Integration-test = Package deployen naar een testomgeving en hierop tests uitvoeren
+	\item Verify = Verifiëren van de package + bepaalde criteria controleren
+		\item Install = Installeren van de package in de local repository
+	\item Deploy = Kopieëren van de package naar de remote repository (Vb: Glassfish)
+\end{itemize}
+	
+$\Rightarrow$ Als één fase wordt uitgevoerd, worden alle fases daarvoor ook uitgevoerd!
+
+Extra info: \url{http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html}
+
+\section{Know that tasks are executed by plugins.}
+\begin{itemize}
+	\item De nodige plugins in de <build> tag (pom.xml) plaatsen
+	\item Deze plugins zullen uitgevoerd worden na een build
+\end{itemize}
+
+$\Rightarrow$ Het doel van een plugin: Een specifieke taak, kleiner dan een fase, uitvoeren
+
+\section{Know that Maven has a number of standard plugins, which are called automatically when you execute a standard build.}
+
+Welke zijn die standaard plugins, die automatisch worden uitgevoerd???
+
+Volledige lijst van plugins: \url{http://maven.apache.org/plugins/}
+
+\section{Know that you can add plugins for non-standard tasks.}
+
+\begin{itemize}
+\item glassfish:start-domain/stop-domain: Het domein (her)starten
+\item glassfish:deploy/redeploy: Programma’s deployen naar de (lokale) glassfish server
+\end{itemize}
+
+$\Rightarrow$ Hiervoor moet men de Glassfish plugin(s) toevoegen!
+
+\section{Know that you can write your own plugins.}
+
+Voorbeeld:
+
+\begin{minted}{java}
+
+package sample.plugin;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Mojo;
+
+/**
+* Says "Hi" to the user.
+*
+*/
+@Mojo( name = "sayhi")
+public class GreetingMojo extends AbstractMojo
+{
+public void execute() throws MojoExecutionException
+{
+getLog().info( "Hello, world." );
+}
+}
+
+
+\end{minted}
+
+
+
+
+
+
+
+\begin{figure}[tbph!]
+	\centering
+	\missingfigure[figwidth=6cm]{Testing a long text string}
+%	\includegraphics[width=9cm]{images/startersloonictbachelor2}
+	\caption[Startersloon overzicht voor bachelor diploma ICT]{Dit is een overzicht van de starterslonen voor het bachelordiploma ICT die je gemiddeld zou verdienen.}
+	\label{fig:startersloonictbachelor}
+\end{figure}
+\newpage
+Hierbij heb ik mezelf bij de grootste groep gerekend, dus de 54\% groep, en heb dan het bedrag in het midden genomen ter referentie, dus 2125\euro{} als bruto startersloon per maand. Vervolgens bedraagt mijn nettoloon 1557~\euro{} per maand, dit heb ik dan weer berekend via de Jobat Bruto Netto Calculator\cite{Jobatvoo94}.
+
+
+
+%Ik heb gebruik gemaakt van een bestaand profiel op de jobat-site van een
+%\fnurl{Software Engineer}{http://www.jobat.be/nl/artikels/het-loon-van-een-junior-net-software-engineer-1400-euro-netto/}\cite{Hetloonv82} van mijn leeftijd, om data te achterhalen qua bedragen. Mijn dertiende maand heb ik berekend via een tool op \fnurl{jobat.be}{http://www.jobat.be/nl/artikels/de-eindejaarspremie-in-paritair-comite-218/}. Deze bedraagt 1041\euro{} bij een bruto maandloon van 2020\euro{}.
+
+
+
+
+%text webadres
+%\fnurl{Het loon van een junior .NET Software Engineer: 1.400 euro netto}{http://www.jobat.be/nl/artikels/het-loon-van-een-junior-net-software-engineer-1400-euro-netto/}
+
+%\fnurl{Welke soorten bonus bestaan er?}{http://www.jobat.be/nl/artikels/welke-soorten-bonus-bestaan-er/}
+%\fnurl{Extralegale voordelen}{http://www.jobat.be/nl/tag/extralegale-voordelen/}
+%\fnurl{bereken je vakantiegeld}{http://www.jobat.be/nl/artikels/bereken-je-vakantiegeld/}
+%\fnurl{wat-staat-er-allemaal-op-mijn-loonfiche}{http://www.jobat.be/nl/artikels/wat-staat-er-allemaal-op-mijn-loonfiche/}
+%\fnurl{vergelijk je loon}{http://www.jobat.be/nl/loonwijzer/}
+%\fnurl{verdien-jij-genoeg-bereken-het-met-de-jobat-loonwijzer}{http://www.jobat.be/nl/artikels/verdien-jij-genoeg-bereken-het-met-de-jobat-loonwijzer/}
+%\fnurl{Het loon van een softwareontwikkelaar: 2.088 euro netto}{http://www.jobat.be/nl/artikels/het-loon-van-een-softwareontwikkelaar-2088-euro-netto/}
+%\fnurl{jobat tools testen}{http://www.jobat.be/nl/tools-testen/}
+%\fnurl{het-loon-van-een-ict-supportmedewerker-1385-euro-netto}http://www.jobat.be/nl/artikels/het-loon-van-een-ict-supportmedewerker-1385-euro-netto/{}
+%\fnurl{het-loon-van-een-software-engineer-2500-euro-netto}{http://www.jobat.be/nl/artikels/het-loon-van-een-software-engineer-2500-euro-netto/}
+
+
+%\fnurl{}{http://www.jobat.be/nl/loonwijzer-starterslonen/}
+%\fnurl{}{https://www.9lives.be/forum/werk-studie/893551-wat-uw-brutoloon-deel-5-a-88.html\#post17419448}
+
+\subsection{Inkomsten}\index{Inkomsten}
+
+De inkomsten bestaan uit twee delen: het beroepsinkomen\index{Inkomsten!beroepsinkomen} en de andere inkomsten\index{Inkomsten!andere inkomsten}.
+Het beroepsinkomen bestaat uit verschillende onderdelen. Ten eerste is er het beroepsinkomen van de man (1557~\euro{} nettoloon en 2125~\euro{} brutoloon). Het beroepsinkomen van de vrouw is 0~\euro{} omdat ik vrijgezel ben. De maaltijdcheques zijn berekend op 220 gewerkte dagen te vermenigvuldigen met de waarde van een maaltijdcheque, namelijk 8~\euro{}. Dus hebben we een totaal van 1760~\euro{}.
+
+Het kindergeld is uiteraard 0~\euro{} aangezien ik vrijgezel ben en geen kinderen heb. De huurinkomsten zijn ook 0~\euro{} aangezien ik nog geen eigendommen te verhuren heb en omdat het het eerste jaar is dat ik werk, kan ik ook niks terugkrijgen van de belastingen.
+Dit alles maakt dat ik een totaal heb qua inkomsten van 20444~\euro{} per jaar of 1557~\euro{} per maand.
+
+%\input{texfiles/include-chapter1/tabels/tabel1}
+%\subimport{../tabels/}{tabel1.tex}
+%\subimport{../tabels/}{tabel2.tex}
+%\subimport{../tabels/}{tabel3.tex} % dit is het volledige overzicht zoals in excel te zien was.
+
+
+%\todo[inline]{Maaltijdcheques berekenen. Hoe?}
+%\vspace{-1em}
+\begin{table}[ht]
+%	\begin{minipage}[b]{0.45\linewidth}\centering
+	\begin{minipage}[b]{9cm}\centering
+		\begin{tabular}{@{}lr@{}}
+			\toprule
+			               \multicolumn{2}{c}{Beroepsinkomen}                 \\
+			\cmidrule(r){1-2}
+		Inkomen               &        Euro (\euro{}) \\ \midrule
+			Beroepsinkomen man (op jaarbasis)         &         18684 \euro{} \\
+			Beroepsinkomen vrouw (op jaarbasis)       &             0 \euro{} \\
+			Maaltijdcheques                           &           1760 \euro{} \\
+			Dertiende maand en vakantiegeld           &             0 \euro{} \\
+			Bonussen                                  &             0 \euro{} \\
+			Inkomsten uit een zelfstandige activiteit &             0 \euro{} \\ \toprule
+			\textbf{Totaal van de inkomsten}          & \textbf{20444 \euro{}} \\ \bottomrule
+		\end{tabular}
+	\caption{Tabel van het beroepsinkomen}
+	\label{tab:tabelberoepsinkomen}
+		
+		
+	\end{minipage}
+	\hspace{0.5cm}
+%	\begin{minipage}[b]{0.45\linewidth}\centering
+\begin{minipage}[b]{9cm}\centering
+	\begin{tabular}{@{}lr@{}} \toprule
+		\multicolumn{2}{c}{Andere inkomsten} \\ \cmidrule(r){1-2}
+		Inkomen    										& Euro (\euro{})\\ \midrule
+		kindergeld      								& 0 \euro{}\\
+		Huurinkomsten    								& 0 \euro{}\\
+		Teruggave van belastingen       				& 0 \euro{}\\
+		Intresten, divendenden van beleggingen, ...  	& 0 \euro{}\\
+		\toprule
+		\textbf{Totaal van de inkomsten}              	& \textbf{0 \euro{}}   \\ \bottomrule
+	\end{tabular}
+	\caption{Tabel van de andere inkomsten}
+	\label{tab:tabelandereinkomsten}
+	\end{minipage}
+\end{table}
+%\vspace{-1em}
+
+
+\newpage
+\subsection{Uitgaven}\index{Uitgaven}
+
+Voor mijn maandelijkse uitgaven\index{Uitgaven!maandelijkse uitgaven} heb ik al geen huishuur, afbetaling van lening, elektriciteit, water, gas of internet te betalen aangezien ik nog thuis blijf wonen. Hierdoor kan ik een groter bedrag sparen. Ik ga wel mijn eigen kleren kopen en deels meebetalen voor de voeding waardoor ik toch een kleine onkost heb per maand van 200~\euro{} of 2400~\euro{} per jaar.
+
+Ook, omdat ik weeral thuis blijf wonen, heb ik voor de jaarlijks terugkerende uitgaven\index{Uitgaven!jaarlijks terugkerende uitgaven} geen kosten voor de brandverzekering en ook geen kosten voor het onderhoud van de woning. Aangezien ik van mijn bedrijf een bedrijfswagen krijg als extralegaal voordeel (het gebeurt nog zelden dat informatici geen bedrijfswagen krijgen tegenwoordig), betaal ik ook geen autoverzekering noch onderhoud voor de wagen. Aangezien ik geen kinderen heb, kan ik ook niet betalen voor hun studies. Ik heb wel 1000~\euro{} berekend als uitgave voor mijn vakantie. En voor diversen heb ik 100~\euro{} uitgerekend. Dit alles maakt dat ik een totaal heb qua uitgaven van 3500~\euro{} (=1100 + (200*12)) per jaar of 200~\euro{} per maand (zie tabel \ref{tab:tabelmaandelijksterugkerendeuitgaven}).
+
+%\input{texfiles/include-chapter1/tabels/tabel1}
+%\subimport{../tabels/}{tabel4.tex}
+%\subimport{../tabels/}{tabel5.tex}
+%\subimport{../tabels/}{tabel6.tex}
+
+\begin{table}[ht]
+	\begin{minipage}[b]{0.45\linewidth}\centering
+%		\begin{table}[!htbp]
+%			\centering
+			\begin{tabular}{@{}lr@{}}
+				\toprule
+				         \multicolumn{2}{c}{Maandelijks terugkerende uitgaven}          \\
+				\cmidrule(r){1-2}
+				Uitgaven                  &        Euro (\euro{}) \\ \midrule
+				Huishuur of afbetaling van de lening            &             0 \euro{} \\
+				Uitgaven voor voeding en kleding                &           200 \euro{} \\
+%				Uitgaven voor voeding en kleding                &           400 \euro{} \\
+				%				Elektriciteit, water, gas, internet, \dots &           250 \euro{} \\
+				Elektriciteit, water, gas, internet, \dots      &             0 \euro{} \\
+				\dots                                           &               \euro{} \\ \toprule
+				\textbf{Totaal van de uitgaven}                 & \textbf{200 \euro{}} \\ \bottomrule
+			\end{tabular}
+			\caption{Tabel van de maandelijks terugkerende uitgaven}
+			\label{tab:tabelmaandelijksterugkerendeuitgaven}
+%		\end{table}
+		
+		
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.45\linewidth}
+		\centering
+%		\begin{table}[!htbp]
+%			\centering
+			\begin{tabular}{@{}lr@{}}
+				\toprule
+				  \multicolumn{2}{c}{Jaarlijks terugkerende uitgaven}   \\
+				\cmidrule(r){1-2}
+				Uitgaven  &        Euro (\euro{}) \\ \midrule
+				%				Brand- en autoverzekering  &           200 \euro{} \\
+				Brand- en autoverzekering       &             0 \euro{} \\
+				Onderhoud auto                  &             0 \euro{} \\
+				%				Onderhoud woning           &            20 \euro{} \\
+				Onderhoud woning                &             0 \euro{} \\
+				Studies kinderen                &             0 \euro{} \\
+				Belastingen                     &             0 \euro{} \\
+				%\todo[inline]{Belastingen moeten niet berekend worden!!!} & \\
+				Vakantie                        &          1000 \euro{} \\
+				Diversen                        &           100 \euro{} \\
+				\dots                           &  \\ \toprule
+				\textbf{Totaal van de uitgaven} & \textbf{1100 \euro{}} \\ \bottomrule
+			\end{tabular}
+			\caption{Tabel van de jaarlijkse terugkerende uitgaven}
+			\label{tab:tabeljaarlijksterugkerendeuitgaven}
+%		\end{table}
+	\end{minipage}
+\end{table}
+
+Als eindbudget krijg ik na het verschil te berekenen tussen de inkomsten (20444~\euro{}) en de uitgaven (3500 \euro{}), een eindtotaal van \textbf{16944~\euro{}} dat ik kan sparen per jaar. Dit komt neer op een maandelijks bedrag van \textbf{1412~\euro{}} dat ik kan sparen.
+

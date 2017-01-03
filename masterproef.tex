@@ -1,0 +1,409 @@
+\documentclass[master=ucll,dutch,twoside]{ucllfilip}
+%\documentclass[master=bin,masteroption=eg]{kulemt}
+%master is hetgene dat gedefinieerd staat in de .cfg file
+%masteroption is hetgene bij ELT gedeelte staat als optie
+%and command is voor een 2de lijn bij te voegen
+\setup{
+	title={Samenvatting Distributed Applications},
+  author={Filip Vanden Eynde \and R0363898 \and 3TX/1},
+  promotor={Professor Kasper Cools}}
+
+
+
+% De volgende \ setup mag verwijderd worden als geen fiche gewenst is.
+\setup{filingcard,
+  translatedtitle={Portfolio money management},
+translatedtitle={},
+  udc=621.3,
+  keywords={beleggen anders bekeken, ucll, portfolio},
+  shortabstract={Hier komt een heel bondig abstract van hooguit 500
+    woorden. \LaTeX\ commando's mogen hier gebruikt worden. Blanco lijnen
+    (of het commando \texttt{\string\pa r}) zijn wel niet toegelaten!
+   \endgraf \lipsum[2]}}
+
+% Verwijder de "%" op de volgende lijn als je de kaft wil afdrukken
+%\setup{coverpageonly}
+\write18{pdflatex masterproefcoverpage -aux-directory=outputfoldercoverpage}
+%\write18{pdflatex masterproefcoverpage}
+
+% Verwijder de "%" op de volgende lijn als je enkel de eerste pagina's wil
+% afdrukken en de rest bv. via Word aanmaken.
+%\setup{frontpagesonly}
+
+\newcommand{\kleurlinkstableofcontents}{blue}
+
+% Kies de fonts voor de gewone tekst, bv. Latin Modern
+%\setup{font=palatino}
+
+\setup{font=utopia}
+
+\setup{inputenc=utf8}
+
+\usepackage{ifthen}
+\newboolean{pdfoutput}
+\setboolean{pdfoutput}{true}
+%\setboolean{pdfoutput}{false}
+
+% Hier kun je dan nog andere pakketten laden of eigen definities voorzien
+
+\usepackage{ucllfilip}
+\chapterstyle{ucllfilipman}
+\ucllfilipmanToC{}
+
+\usepackage{minted}
+
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{subcaption}
+
+%\usepackage{geometry}
+%\usepackage{pdflscape}
+%for bibliography
+\usepackage[backend=biber,
+%style=alphabetic,
+style=numeric,
+%style=ieee,
+%style=ieee-alphabetic,
+citestyle=numeric,
+%refsection=chapter,
+refsegment=chapter,
+defernumbers=true,
+%sorting=ynt,
+sorting=nty
+]{biblatex}
+%\addbibresource{referenties.bib}
+
+\addbibresource{resources.bib} %Imports bibliography file
+\addbibresource{chapter1.bib}
+%\addbibresource{chapter2.bib}
+%\addbibresource{chapter3.bib}
+%\addbibresource{chapter4.bib}
+
+%\defbibheading{subbibliography}{%
+%	\section*{References for Chapter \ref{refsection:
+%			,→ \therefsection}}}
+
+
+\defbibheading{bibliography}[\bibname]{%
+	\section{#1}%
+	\markboth{#1}{#1}}
+
+
+%indexes
+%voor indexen te maken
+\usepackage{imakeidx}
+\makeindex[
+%columns=3, % geeft layout van 3 kolommen
+title=Alphabetical Index, % verandert de default title = index
+intoc] % voegt de indexpagina aan de inhoudsopgave toe
+
+\usepackage{import}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+%\usepackage{todo}
+\usepackage{todonotes}
+
+%provides the multicols environment which typesets text into multiple columns.
+\usepackage{multicol}
+\usepackage[official]{eurosym}
+
+%-------------------------------------------------------------------------------------------------------------------------
+% pas plaats voor en na headings aan gebruikmakend van package titlesec
+%-------------------------------------------------------------------------------------------------------------------------
+
+\usepackage{titlesec}
+%\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+%\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+
+%------------------------------------------------------------------------
+
+% Define a set of colours for syntax highlighting
+
+\definecolor{MyColor1}{rgb}{0.2,0.4,0.6} %mix personal color
+\definecolor{azure(colorwheel)}{rgb}{0.0, 0.5, 1.0}
+\newcommand{\textb}{\color{Black} \usefont{OT1}{lmss}{m}{n}}
+\newcommand{\blue}{\color{MyColor1} \usefont{OT1}{lmss}{m}{n}}
+\newcommand{\blueb}{\color{MyColor1} \usefont{OT1}{lmss}{b}{n}}
+\definecolor{purpleexcel}{rgb}{0.4392156862745,0.18823529,0.62745098039}
+\definecolor{dkgreen}{rgb}{0,.6,0}%
+\definecolor{dkblue}{rgb}{0,0,.6}%
+\definecolor{dkyellow}{cmyk}{0,0,.8,.3}%
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}%
+\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}%
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}%
+\definecolor{editorOcher}{rgb}{1, 0.5, 0}%
+\definecolor{editorGreen}{rgb}{0, 0.5, 0}%
+\definecolor{orange}{rgb}{1,0.45,0.13}%
+\definecolor{olive}{rgb}{0.17,0.59,0.20}%
+\definecolor{brown}{rgb}{0.69,0.31,0.31}%
+\definecolor{purple}{rgb}{0.38,0.18,0.81}%
+\definecolor{lightblue}{rgb}{0.1,0.57,0.7}%
+\definecolor{lightred}{rgb}{1,0.4,0.5}%
+\definecolor{ChapBlue}{rgb}{0.00,0.65,0.65}
+
+%hier komen alle commando's en constante variabelen voor in de opdracht te gebruiken.
+\newcommand{\functiejob}{Softwareontwikkelaar}
+\graphicspath{{images/}} % Set the default folder for images
+%I usually write something like this, so the entry is hyperlinked for onscreen reading but there's also a footnote to the URL for paper output.
+\newcommand\fnurl[2]{%
+	\href{#2}{#1}\footnote{\url{#2}}%
+}
+%\setlist[itemize,1]{leftmargin=*,topsep=0pt}
+%\setlist[enumerate,1]{leftmargin=*,topsep=0pt}
+\setlist{nosep}
+%\newcommand{\tabelgeometry}{%
+%\newgeometry{total={7.7in, 9.5in},top=0.7in,bottom=0.7in}
+%}
+
+\renewcommand\mempostaddapppagetotochook{\cftinserthook{toc}{BREAK}}
+\cftinsertcode{BREAK}{\changetocdepth{-10}}
+\let\normalchangetocdepth\changetocdepth % needed for later
+
+\makeatletter
+\newcommand\appendixtableofcontents{
+	\begingroup
+	\let\changetocdepth\@gobble
+	\normalchangetocdepth{-10}
+	\cftinsertcode{BREAK}{\normalchangetocdepth{3}}
+	\renewcommand\contentsname{Appendices overzicht}
+	\tableofcontents*
+	\endgroup
+}
+\makeatother
+
+
+%\chapterstyle{BlueBox}
+
+
+
+\ifthenelse {\boolean{pdfoutput}}
+	{
+	\usepackage[
+	%hidelinks = true,
+	pdfusetitle,colorlinks,urlcolor=magenta,linkcolor=\kleurlinkstableofcontents,
+	plainpages=false,bookmarks=true,bookmarksnumbered,linktoc=all,pdffitwindow=true,
+	pdftex,pdfauthor={\theauthor},pdftitle={\thetitle},pdfsubject={\thesubject},
+	pdfkeywords={\thekeywords},pdfproducer={\theauthor},pdfcreator={\theauthor}
+	]{hyperref}	
+	}{
+%\usepackage[
+%hidelinks = true,
+%pdfusetitle,colorlinks,urlcolor=magenta,linkcolor=\kleurlinkstableofcontents,
+%plainpages=false,bookmarks=true,bookmarksnumbered,linktoc=all,pdffitwindow=true,
+%pdftex,pdfauthor={\theauthor},pdftitle={\thetitle},pdfsubject={\thesubject},
+%pdfkeywords={\thekeywords},pdfproducer={\theauthor},pdfcreator={\theauthor}
+%]{hyperref}
+
+%\usepackage{nohyperref}  % This makes hyperref commands do nothing without errors
+%\usepackage{url}  % This makes \url work
+
+\usepackage[draft]{hyperref}
+}
+
+
+\begin{comment}
+% Tenslotte wordt hyperref gebruikt voor pdf bestanden.
+% Dit mag verwijderd worden voor de af te drukken versie.
+\usepackage[
+%hidelinks = true,
+pdfusetitle,
+colorlinks,
+urlcolor=magenta,
+linkcolor=\kleurlinkstableofcontents,
+%linkcolor=black, %Verander dit om de linkkleuren van de tableofcontents aan te passen
+%colorlinks=false, %links krijgen kleuren of niet
+plainpages=false,
+bookmarks=true,
+bookmarksnumbered,
+linktoc=all, %maakt zowel de tekst als het paginanummer klikbaar en gelinkt
+pdffitwindow=true,
+pdftex,
+%% PDF Author
+pdfauthor={\theauthor},
+%% PDF title
+pdftitle={\thetitle},
+%% PDF Subject
+pdfsubject={\thesubject},
+%% PDF Keywords
+pdfkeywords={\thekeywords},
+%% PDF producer
+pdfproducer={\theauthor},
+%% PDF Creator
+pdfcreator={\theauthor}
+]{hyperref}
+
+\end{comment}
+
+
+
+%%%%%%%
+% Om wat tekst te genereren wordt hier het lipsum pakket gebruikt.
+% Bij een echte masterproef heb je dit natuurlijk nooit nodig!
+\IfFileExists{lipsum.sty}%
+ {\usepackage{lipsum}\setlipsumdefault{11-13}}%
+ {\newcommand{\lipsum}[1][11-13]{\par Hier komt wat tekst: lipsum ##1.\par}}
+%%%%%%%
+
+
+
+
+%\includeonly{hfdst-n}
+\begin{document}
+
+
+\begin{comment}
+\begin{preface}
+Graag bedank ik iedereen die mij hierbij ondersteund heeft, namelijk mijn professor, mijn vrienden en klasgenoten, alsook mijn familie.
+
+%Dit is mijn dankwoord om iedereen te danken die mij bezig gehouden heeft. Hierbij dank ik mijn professor, mijn vrienden en mijn klasgenoten.  Ook mijn familie heeft mij erg gesteund natuurlijk.
+
+
+\end{preface}
+\end{comment}
+
+
+\tableofcontents*
+%\tableofcontents
+
+\begin{comment}
+\begin{abstract}	
+	
+  In dit \texttt{abstract} environment wordt een al dan niet uitgebreide
+  samenvatting van het werk gegeven. De bedoeling is wel dat dit tot
+  1~bladzijde beperkt blijft.
+
+  \lipsum[1]
+
+  \todo[inline]{Samenvatting schrijven}
+
+
+
+\end{abstract}
+\end{comment}
+
+% Een lijst van figuren en tabellen is optioneel
+%\listoffigures
+%\listoftables
+% Bij een beperkt aantal figuren en tabellen gebruik je liever het volgende:
+\listoffiguresandtables
+\todo[inline]{Nakijken of alle labels van figuren en tabellen uniek en duidelijk gedefinieerd zijn?}
+
+\begin{comment}
+% De lijst van symbolen is eveneens optioneel.
+% Deze lijst moet wel manueel aangemaakt worden, bv. als volgt:
+\chapter{Lijst van afkortingen en symbolen}
+\section*{Afkortingen}
+\begin{flushleft}
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabularx}{\textwidth}{@{}p{12mm}X@{}}
+   %LoG   & Laplacian-of-Gaussian \\
+   %MSE   & Mean Square error \\
+   %PSNR  & Peak Signal-to-Noise ratio \\
+  \end{tabularx}
+\end{flushleft}
+\section*{Symbolen}
+\begin{flushleft}
+  \renewcommand{\arraystretch}{1.1}
+  \begin{tabularx}{\textwidth}{@{}p{12mm}X@{}}
+    %42    & ``The Answer to the Ultimate Question of Life, the Universe,
+    %        and Everything'' volgens de \cite{h2g2} \\
+    %$c$   & Lichtsnelheid \\
+    %$E$   & Energie \\
+    %$m$   & Massa \\
+    %$\pi$ & Het getal pi \\
+  \end{tabularx}
+\end{flushleft}
+\end{comment}
+
+\todo[inline]{Op het einde de list of todos verwijderen.}
+\listoftodos
+
+% Nu begint de eigenlijke tekst
+\mainmatter
+
+\clearforchapter
+%\pagestyle{filip}
+
+%\include{texfiles/inleiding/inleiding}
+
+\import{texfiles/include-chapter1/}{chapter1.tex}
+\import{texfiles/include-chapter2/}{chapter2.tex}
+\import{texfiles/include-chapter3/}{chapter3.tex}
+% ... en zo verder tot
+\import{texfiles/include-chapter4/}{chapter4.tex}
+
+
+%\include{texfiles/inleiding/inleiding}
+%\include{texfiles/include-chapter1/chapter1}
+%\include{texfiles/include-chapter2/chapter2}
+%\include{texfiles/include-chapter3/chapter3}
+% ... en zo verder tot
+%\include{texfiles/include-chapter4/chapter4}
+
+
+\import{./}{besluit.tex}
+%\include{besluit}
+
+% Indien er bijlagen zijn:
+\appendixpage*          % indien gewenst
+\appendix
+%\appendixpage          % indien gewenst
+\appendixtableofcontents
+
+
+
+
+%\chapter{Het loon van een junior .NET Software Engineer: 1.400 euro netto}
+%\includepdf[pages=-]{guidelines_thesis.pdf}
+%\includepdf[pages={1-2}]{guidelines_thesis.pdf}
+%\includepdf[pages=-]{loonjobatprofielvoorbudgetgebruikt.pdf}
+
+%\chapter{bijlage 2}
+
+%\include{app-A}
+% ... en zo verder tot
+%\include{app-n}
+
+\backmatter
+
+%for bibtex
+% Na de bijlagen plaatst men nog de bibliografie.
+% Je kan de  standaard "abbrv" bibliografiestijl vervangen door een andere.
+%\nocite{*}
+%\bibliographystyle{abbrv}
+%\bibliography{referenties}
+
+\chapter{Bibliografie}
+
+
+%for bibLatex
+%\printbibliography[heading=bibintoc,title={Whole bibliography}] %Prints the entire bibliography with the titel "Whole bibliography"
+
+%hiermee worden alle entries getoond, zelfs als ze niet vermeld worden in de tekst.
+%\nocite{*}
+
+%Filters bibliography
+\printbibliography
+\printbibliography[heading=subbibintoc,type=online,title={Sites only}]
+\todo[inline]{Gebruikte bronnen en sites nog als bibliografie toevoegen achteraan.}
+
+%\printbibliography[heading=subbibintoc,type=article,title={Articles only}]
+%\printbibliography[heading=subbibintoc,type=book,title={Books only}]
+
+%op aparte pagina zo schrijven dan
+%\printbibliography[type=book,title={Books only}]
+%\printbibliography[keyword={physics},title={Physics-related only}]
+%\printbibliography[keyword={latex},title={\LaTeX-related only}]
+
+%\chapter{Index}
+
+\printindex
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -1,0 +1,70 @@
+% Reset the margins to be symmetric
+%\setlrmarginsandblock{1.5cm}{1.5cm}{*}
+%\setulmarginsandblock{2cm}{2cm}{*}
+%\checkandfixthelayout
+
+
+%\tabelgeometry
+
+\begingroup
+
+%\setlength{\arrayrulewidth}{0.6mm}
+%This sets the thickness of the borders of the table. In the example is 1mm but you can use other units, see the article Lengths in LaTeX for a complete list.
+%\setlength{\tabcolsep}{18pt}
+%The space between the text and the left/right border of its containing cell is set to 18pt with this command. Again, you may use other units if needed.
+\renewcommand{\arraystretch}{1.5}
+%The height of each row is set to 1.5 relative to its default height.
+
+\begin{table}[!htbp]
+	\centering
+	%\begin{tabular}{|l|l|l|l|}
+	\begin{tabular}{l l l l}
+		\arrayrulecolor{black}
+		\hline
+		%\toprule
+		\rowcolor{purpleexcel}
+		\multicolumn{4}{c}{\textcolor{white}{\textbf{BUDGET}}} \\ \hline
+		
+		\rowcolor{purpleexcel}
+		\multicolumn{1}{c}{\textcolor{white}{\textbf{Inkomsten}}} & \multicolumn{1}{c}{\textcolor{white}{\textbf{euro}}} & 
+		\multicolumn{1}{c}{\textcolor{white}{\textbf{Uitgaven}}} & \multicolumn{1}{c}{\textcolor{white}{\textbf{euro}}} \\ \hline
+		%\centering Inkomsten & \centering euro & \centering Uitgaven & \centering euro \tabularnewline \hline
+		
+		\textbf{1. Beroepsinkomen}                      & \textbf{1535 \euro{}} & \textbf{1. Maandelijks terugkerende uitgaven} & 1005 \euro{} \\ \hline
+		Beroepsinkomen man                              & 1535 \euro{}          & Huishuur of afbetaling van de lening          & 0 \euro{} \\ \hline
+		Beroepsinkomen vrouw                            & 0  \euro{}            & Uitgven voor voeding en kleding               & 700 \euro{} \\ \hline
+		Maaltijdcheques                                 & 0 \euro{}             & Elektriciteit, water, gas, internet, ...      & 305 \euro{} \\ \hline
+		Dertiende maand en vakantiegeld                 & 0 \euro{}             & ...                                           & 0 \euro{} \\ \hline
+		Bonussen                                        & 0 \euro{}             &                                               &  \\ \hline
+		Inkomsten uit zelfstandige activiteit           & 0 \euro{}             &                                               &  \\ \hline
+		...                                             &                       &                                               &   \\ \hline
+		&                       &                                               & \\ \hline
+		
+		\textbf{2. Andere inkomsten}                    & 0 \euro{}             & \textbf{2. Jaarlijks terugkerende uitgaven}   & 970 \euro{} \\ \hline
+		kindergeld                                      & 0 \euro{}             & Brand- en autoverzekering                     & 720 \euro{} \\ \hline
+		Huurinkomsten                                   & 0 \euro{}             & Onderhoud auto                                & 250 \euro{} \\ \hline
+		Teruggave van belastingen                       & 0 \euro{}             & Onderhoud woning                              & 0 \euro{} \\ \hline
+		Intresten, divendenden van beleggingen, ...     & 0 \euro{}             & Studies kinderen                              & 0 \euro{} \\ \hline
+		&                       & Belastingen                                   & 0 \euro{} \\ \hline
+		&                       & Vakantie                                      & 0 \euro{} \\ \hline
+		&                       & Diversen                                      & 0 \euro{} \\ \hline
+		&                       & ...                                           & 0 \euro{} \\ \hline
+		&                       &                                               &   \\ \hline
+		&                       &                                               &   \\ \hline
+		&                       &                                               &   \\ \hline
+		\textbf{Totaal van de inkomsten}              & \textbf{1535 \euro{}} & \textbf{Totaal van de uitgaven \euro{}}       & \textbf{1975} \\ %\hline
+		%                                        &               &                                               &       \\
+		%\multicolumn{4}{|c|}{} \\ %\hline
+		%\multicolumn{4}{|c|}{} \\ %\hline
+		%Totaal van de inkomsten & 1535
+		\bottomrule
+		\rowcolor{red}
+		\multicolumn{4}{c}{\textcolor{white}{\textbf{Spaarvermogen = -440 \euro{}}}} \\ \hline
+		
+	\end{tabular}
+	\caption{budget}
+	\label{tab:budgetoverzicht}
+\end{table}
+%\restoregeometry
+
+\endgroup
